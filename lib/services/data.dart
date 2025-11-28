@@ -1,1 +1,32 @@
+import 'package:flutter_application_1/models/category_model.dart';
 
+List<CategoryModel> getCategories() {
+  List<CategoryModel> category = [];
+  CategoryModel categoryModel = CategoryModel();
+  categoryModel.categoryName = 'Business';
+  categoryModel.image = 'images/business.jpg';
+  category.add(categoryModel);
+  categoryModel = CategoryModel();
+
+  categoryModel.categoryName = 'Entertainment';
+  categoryModel.image = 'images/entertainment.jpg';
+  category.add(categoryModel);
+  categoryModel = CategoryModel();
+
+  categoryModel.categoryName = 'Science';
+  categoryModel.image = 'images/science.jpg';
+  category.add(categoryModel);
+  categoryModel = CategoryModel();
+
+  categoryModel.categoryName = 'Sports';
+  categoryModel.image = 'images/sports.jpg';
+  category.add(categoryModel);
+  categoryModel = CategoryModel();
+
+  categoryModel.categoryName = 'Technology';
+  categoryModel.image = 'images/technology.jpg';
+  category.add(categoryModel);
+  categoryModel = CategoryModel();
+
+  return category;
+}
