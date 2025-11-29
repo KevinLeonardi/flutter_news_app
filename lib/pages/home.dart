@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/article_model.dart';
 import 'package:flutter_application_1/models/category_model.dart';
 import 'package:flutter_application_1/services/data.dart';
+import 'package:flutter_application_1/services/news.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,11 +13,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
+  List<ArticleModel> articles = [];
+  bool loading = true;
 
   @override
   void initState() {
     categories = getCategories();
+    getNews();
     super.initState();
+  }
+
+  getNews() async {
+    News newsclass = News();
+    await newsclass.getNews();
+    articles = newsclass.news;
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -60,11 +74,14 @@ class _HomeState extends State<Home> {
             SizedBox(height: 10),
             Container(
               height: MediaQuery.of(context).size.height / 2.85,
-              child: ListView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: articles.length,
                 scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 3, left: 5),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 3, left: 5, right: 10),
                     child: Material(
                       elevation: 3.0,
                       borderRadius: BorderRadius.circular(10),
@@ -79,8 +96,8 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.all(10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  'images/news2.jpg',
+                                child: Image.network(
+                                  articles[index].urlToImage!,
                                   width:
                                       MediaQuery.of(context).size.width / 1.8,
                                   fit: BoxFit.cover,
@@ -88,26 +105,26 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
                             Container(
                               width: MediaQuery.of(context).size.width / 1.8,
                               child: Text(
-                                'Ini adalah judul berita 1',
+                                maxLines: 2,
+                                articles[index].title!,
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 19,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
                             Container(
                               width: MediaQuery.of(context).size.width / 1.8,
                               child: Text(
-                                'Ini adalah isi berita 1',
+                                maxLines: 2,
+                                articles[index].desc!,
                                 style: TextStyle(
                                   color: Color.fromARGB(151, 0, 0, 0),
-                                  fontSize: 15,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -133,82 +150,8 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 20.0),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 3, left: 5),
-                    child: Material(
-                      elevation: 3.0,
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  'images/news2.jpg',
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.8,
-                                  fit: BoxFit.cover,
-                                  height: 150,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 1.8,
-                              child: Text(
-                                'Ini adalah judul berita 1',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 1.8,
-                              child: Text(
-                                'Ini adalah isi berita 1',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color.fromARGB(151, 0, 0, 0),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              width: 80,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Color(0xff3280ef),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                ),
-                              ),
-                              margin: EdgeInsets.only(left: 160),
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
             SizedBox(height: 10),
