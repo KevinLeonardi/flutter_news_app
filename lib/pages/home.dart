@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/article_model.dart';
 import 'package:flutter_application_1/models/category_model.dart';
+import 'package:flutter_application_1/pages/category_news.dart';
 import 'package:flutter_application_1/services/data.dart';
 import 'package:flutter_application_1/services/news.dart';
 
@@ -253,42 +254,52 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 20),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(60),
-            child: Image.asset(
-              image,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryNews(name: categoryName),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 20),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(60),
+              child: Image.asset(
+                image,
+                height: 120,
+                width: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
               height: 120,
               width: 120,
-              fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                color: Colors.black45,
+                borderRadius: BorderRadius.circular(60),
+              ),
             ),
-          ),
-          Container(
-            height: 120,
-            width: 120,
-            decoration: BoxDecoration(
-              color: Colors.black45,
-              borderRadius: BorderRadius.circular(60),
-            ),
-          ),
-          Container(
-            height: 120,
-            width: 120,
-            child: Center(
-              child: Text(
-                categoryName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+            Container(
+              height: 120,
+              width: 120,
+              child: Center(
+                child: Text(
+                  categoryName,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

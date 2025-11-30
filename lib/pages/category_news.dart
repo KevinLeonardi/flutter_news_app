@@ -40,10 +40,18 @@ class _CategoryNewsState extends State<CategoryNews> {
               padding: const EdgeInsets.only(left: 10.0),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
                   SizedBox(width: MediaQuery.of(context).size.width / 3.3),
                   Text(
-                    "Business",
+                    widget.name ,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22.0,
@@ -64,53 +72,75 @@ class _CategoryNewsState extends State<CategoryNews> {
                     topRight: Radius.circular(30),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(244, 255, 255, 255),
-                      ),
-                      margin: EdgeInsets.all(30),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('images/news1.jpg'),
-                          ),
-                          SizedBox(height: 5),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Text(
-                              'Berikut ini adalah judul berita satu. Test satu',
-                              style: TextStyle(
-                                color: const Color.fromARGB(188, 0, 0, 0),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Container(
-                            padding: EdgeInsets.only(left: 5, right: 5),
-                            width: MediaQuery.of(context).size.width,
-                            child: Text(
-                              'Ini adalah isi berita kalimat satu. Ini kalimat dua.',
-                              style: TextStyle(
-                                color: Color.fromARGB(151, 0, 0, 0),
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return CategoryTile(
+                      title: categories[index].title,
+                      desc: categories[index].desc,
+                      image: categories[index].urlToImage,
+                    );
+                  },
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  final image, title, desc;
+  CategoryTile({this.image, this.desc, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 20.0, right: 20, top: 40),
+      child: Column(
+        children: [
+          Container(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(image),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    title!,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: const Color.fromARGB(188, 0, 0, 0),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    desc!,
+                    maxLines: 3,
+                    style: TextStyle(
+                      color: Color.fromARGB(151, 0, 0, 0),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
