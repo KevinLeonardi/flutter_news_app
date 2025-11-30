@@ -29,7 +29,7 @@ class _ArticleViewState extends State<ArticleView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-              'Buzz',
+              'Kevin\'s ',
               style: TextStyle(
                 color: Color(0xff3280ef),
                 fontSize: 30,
@@ -37,7 +37,7 @@ class _ArticleViewState extends State<ArticleView> {
               ),
             ),
             Text(
-              'Line',
+              'News',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 25,
