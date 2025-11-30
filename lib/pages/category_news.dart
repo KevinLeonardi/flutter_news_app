@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/show_category.dart';
+import 'package:flutter_application_1/pages/article_view.dart';
 import 'package:flutter_application_1/services/show_category_news.dart';
 
 class CategoryNews extends StatefulWidget {
@@ -51,7 +52,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                   ),
                   SizedBox(width: MediaQuery.of(context).size.width / 3.3),
                   Text(
-                    widget.name ,
+                    widget.name,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22.0,
@@ -81,6 +82,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                       title: categories[index].title,
                       desc: categories[index].desc,
                       image: categories[index].urlToImage,
+                      url: categories[index].url,
                     );
                   },
                 ),
@@ -94,53 +96,61 @@ class _CategoryNewsState extends State<CategoryNews> {
 }
 
 class CategoryTile extends StatelessWidget {
-  final image, title, desc;
-  CategoryTile({this.image, this.desc, this.title});
+  final image, title, desc, url;
+  CategoryTile({this.image, this.desc, this.title, this.url});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 20.0, right: 20, top: 40),
-      child: Column(
-        children: [
-          Container(
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(image),
-                ),
-                SizedBox(height: 5),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    title!,
-                    maxLines: 2,
-                    style: TextStyle(
-                      color: const Color.fromARGB(188, 0, 0, 0),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: 20.0, right: 20, top: 40),
+        child: Column(
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(image),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      title!,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: const Color.fromARGB(188, 0, 0, 0),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 5),
-                Container(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    desc!,
-                    maxLines: 3,
-                    style: TextStyle(
-                      color: Color.fromARGB(151, 0, 0, 0),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                  SizedBox(height: 5),
+                  Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                      desc!,
+                      maxLines: 3,
+                      style: TextStyle(
+                        color: Color.fromARGB(151, 0, 0, 0),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
