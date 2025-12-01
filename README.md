@@ -8,10 +8,10 @@ Android API level : 35 (Android 15)
 ## Cara menjalankan
 
 1. Ikuti panduan https://docs.flutter.dev/get-started/quick (bagian Download prerequisite software & Install and set up Flutter) untuk setup vs code dan https://docs.flutter.dev/platform-integration/android/setup (ikuti semua) untuk setup android tooling & device (aplikasi di test menggunakan usb debugging)
-2. Jalankan flutter run (build pertama kali memakan waktu 15 menit)
+2. Jalankan ((flutter run)) (build pertama kali memakan waktu 15 menit)
 
 ## Bila error di dependencies
 
-1. Jalankan flutter clean utk bersihkan cache
-2. Jalankan flutter pub get utk menarik package yg dibutuhkan
-3. Jalankan kembali flutter run
+1. Jalankan ((flutter clean)) utk bersihkan cache
+2. Jalankan ((flutter pub get)) utk menarik package yg dibutuhkan
+3. Jalankan kembali ((flutter run))
