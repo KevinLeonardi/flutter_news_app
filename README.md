@@ -17,3 +17,5 @@ flutter clean
 flutter pub get
 flutter run
 ```
+
+Video Demonstrasi Aplikasi : https://bit.ly/kevin-news-app-flutter-demo
