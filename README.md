@@ -1,16 +1,17 @@
-# flutter_application_1
+Kevin's News App
 
-A new Flutter project.
+Ini adalah project aplikasi bertema aplikasi berita yang dikembangkan dalam flutter. Menggunakan public API dari https://newsapi.org/ dan package official webview_flutter. Aplikasi mem-fetch berita dari news api, dapat berdasarkan category, dan menampilkan tiap berita dalam webview sehingga menghasilkan tampilan yang clean dan menarik.
 
-## Getting Started
+Versi flutter SDK : 3.38.3 , webview_flutter : 4.7.0, dart : 3.10.1
+Untuk android api level : 35 (Android 15)
 
-This project is a starting point for a Flutter application.
+## Cara menjalankan
 
-A few resources to get you started if this is your first Flutter project:
+1. Ikuti panduan https://docs.flutter.dev/get-started/quick untuk setup vs code (Hanya bagian Prerequisite & Install and Setup), dan https://docs.flutter.dev/platform-integration/android/setup (baca semua) untuk setup android tooling dan device.
+2. Jalankan flutter run di terminal
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Bila ada error di dependencies maka
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Jalan kan flutter clean
+2. Jalan kan flutter pub get
+3. Jalankan ulang flutter run
