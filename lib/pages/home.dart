@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Buzz',
+                  'Kevin\'s ',
                   style: TextStyle(
                     color: Color(0xff3280ef),
                     fontSize: 25,
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  'Line',
+                  'News App',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
