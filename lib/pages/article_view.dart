@@ -37,7 +37,7 @@ class _ArticleViewState extends State<ArticleView> {
               ),
             ),
             Text(
-              'News App',
+              'News',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 25,
